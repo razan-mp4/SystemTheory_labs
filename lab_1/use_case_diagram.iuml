@@ -47,3 +47,5 @@ rectangle "News System" {
 
   Guest <|-r- PaidSubscriber
 }
+
+@enduml
