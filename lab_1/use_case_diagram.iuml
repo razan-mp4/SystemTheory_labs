@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Guest User" as Guest
+actor "Paid Subscriber" as PaidSubscriber
+actor "Editor" as Editor
+actor "Admin" as Admin
+
+rectangle "News System" {
+  usecase "View News" as ViewNews
+  usecase "Search News" as SearchNews
+  usecase "Share News" as ShareNews
+
+  usecase "Manage Profile" as ManageProfile
+  usecase "Personalized\nNews Preferences" as PersonNewsPreferences
+
+  usecase "Access to weekly digital\nsupplements & magazines" as AccessWeeklyContent
+  usecase "Exclusive materials and content" as ExclusiveMatAndCont
+
+  usecase "Review and fix spelling,\ngrammar and punctuation errors" as ReviewAndFix
+  usecase "Oversee, verify and develop future articles" as OVDFutureArticles
+  
+  usecase "All available opetaions on news" as RESTnews
+  usecase "Publish, update, delete and hide news" as GeneralNewsConf
+  usecase "Additional news configuration" as AddNewsConf
+
+  ViewNews <-. SearchNews : extend
+  ViewNews <-. ShareNews : extend
+  Guest --> ViewNews
+
+  ManageProfile <-. PersonNewsPreferences : include
+  Guest --> ManageProfile : <<if registered>>
+
+  PaidSubscriber --> ViewNews
+  PaidSubscriber --> ManageProfile
+  PaidSubscriber --> AccessWeeklyContent
+  PaidSubscriber --> ExclusiveMatAndCont
+
+  OVDFutureArticles <-. ReviewAndFix : include
+  Editor --> OVDFutureArticles
+
+  RESTnews <-. GeneralNewsConf : include
+  RESTnews <-. AddNewsConf : extend
+
+  Admin --> RESTnews
+
+  Guest <|-r- PaidSubscriber
+}
