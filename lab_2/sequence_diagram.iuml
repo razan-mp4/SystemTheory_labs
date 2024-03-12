@@ -1,0 +1,52 @@
+@startuml
+
+actor "Guest User" as Guest
+participant "News System" as NewsSystem
+database "News Database" as NewsDatabase
+
+== View News ==
+
+Guest -> NewsSystem: Request to View News
+NewsSystem -> NewsDatabase: Retrieve News Data
+NewsDatabase --> NewsSystem: News Data
+NewsSystem --> Guest: Display News
+
+== Search News ==
+
+Guest -> NewsSystem: Request to Search News
+NewsSystem -> NewsDatabase: Search News Data
+NewsDatabase --> NewsSystem: Search Results
+NewsSystem --> Guest: Display Search Results
+
+== Share News ==
+
+Guest -> NewsSystem: Request to Share News
+NewsSystem --> Guest: Share News Interface
+Guest -> NewsSystem: Select News to Share
+NewsSystem -> NewsDatabase: Retrieve News Data
+NewsDatabase --> NewsSystem: News Data
+NewsSystem --> Guest: Share News with Others
+
+== Manage Profile ==
+
+Guest -> NewsSystem: Request to Manage Profile
+NewsSystem --> Guest: Redirect to Login/Register Page
+
+Guest -> NewsSystem: Login/Register
+NewsSystem -> NewsDatabase: Verify User Credentials
+NewsDatabase --> NewsSystem: User Authentication Success/Failure
+NewsSystem --> Guest: Profile Management Interface/Authentication Failure Message
+
+== Personalized News Preferences ==
+
+Guest -> NewsSystem: Request to Set News Preferences
+NewsSystem --> Guest: Redirect to Login/Register Page
+
+Guest -> NewsSystem: Login/Register
+NewsSystem -> NewsDatabase: Verify User Credentials
+NewsDatabase --> NewsSystem: User Authentication Success/Failure
+NewsSystem --> Guest: Personalization Interface/Authentication Failure Message
+
+
+
+@enduml
