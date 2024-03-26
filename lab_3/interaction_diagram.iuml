@@ -1,0 +1,23 @@
+@startuml
+
+rectangle "Mange Profile" {
+    actor GuestUser
+    rectangle "ProfileManagingForm: ProfileOptions" as ProfileManagingForm
+    rectangle "PersonalizedNewsForm: PreferencesOptions" as PersonalizedNewsForm
+    rectangle "NewsDatabaseInteraction: DatabaseInteraction" as NewsDatabase
+    rectangle "NewsDatabase" as DB
+    
+    GuestUser --> ProfileManagingForm: 1:Create/UpdateAccount():Bool
+    ProfileManagingForm --> PersonalizedNewsForm: 2:Open():Bool
+    GuestUser --> PersonalizedNewsForm: 3:ProfileInfo():Bool
+    GuestUser --> PersonalizedNewsForm: 4:Save():Bool
+    PersonalizedNewsForm --> NewsDatabase: 5:SaveAccount(ID:Int):Bool
+    NewsDatabase --> DB: 6:CreateInDB():Bool
+    NewsDatabase <-- DB: 7:GetInfo():String
+    NewsDatabase --> DB: 8:SetInfo(ID:Int, Name:String, Preferences:String):Bool
+    NewsDatabase --> PersonalizedNewsForm: 9:GetInfo():String
+    
+
+}
+@enduml
+
