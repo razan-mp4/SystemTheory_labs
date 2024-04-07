@@ -1,1 +1,76 @@
-@uml
+@startuml
+' Define class styles
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Black
+}
+
+' Base User Class
+class User {
+    -userID: String
+
+    +login(): Boolean
+    +logout(): void
+}
+
+' Interfaces
+interface INewsViewer {
+    +viewNews(newsID: String): News
+    +searchNews(keyword: String): List<News>
+}
+
+interface IProfileManager {
+    +updateProfile(profileDetails: Profile): void
+}
+
+interface IContentAccess {
+    +accessExclusiveContent(): List<Content>
+}
+
+' Concrete Classes
+class Guest implements INewsViewer {
+    +viewNews(newsID: String): News
+    +searchNews(keyword: String): List<News>
+}
+
+class RegisteredUser extends User implements INewsViewer, IProfileManager {
+    -email: String
+    -password: String
+    +profile: Profile
+    +viewNews(newsID: String): News
+    +searchNews(keyword: String): List<News>
+    +updateProfile(profileDetails: Profile): void
+}
+
+class PaidSubscriber extends RegisteredUser implements IContentAccess {
+    +accessExclusiveContent(): List<Content>
+}
+
+class News {
+    -newsID: String
+    -title: String
+    -content: String
+    -publishedDate: Date
+}
+
+class Profile {
+    -preferences: List<String>
+}
+
+class Content {
+    -contentID: String
+    -contentType: String
+    -accessLevel: String
+}
+
+' Relationships and Associations
+
+User <|-- Guest
+RegisteredUser "1" -- "1" Profile : has >
+Guest ..> News : views >
+RegisteredUser ..> News : views >
+PaidSubscriber ..> Content : accesses >
+
+@enduml
