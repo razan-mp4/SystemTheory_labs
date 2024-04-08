@@ -14,6 +14,9 @@ state GuestUser {
     join_state --> Registered : Enter NewsSystem as RegistedUser
 
     Registered --> Unregistered: LogOut
+    
+    Unregistered --> [*] : Leave NewsSystem
+    Registered --> [*]  : Leave NewsSystem
 
 }
 
