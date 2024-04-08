@@ -1,0 +1,38 @@
+@startuml
+start
+
+switch (Guest User Request to)
+    case ()
+        : View News;
+        : Display News;
+        stop
+    case ()
+        : Search News;
+        : Display Search Results;
+        stop
+
+    case ()
+        : Share News;
+        : Share News Interface;
+        : Select News to Share;
+        : Share News with Others;
+        stop
+    case ()
+        : Manage Profile;
+        if (User Registered?) then (yes)
+            : Profile Management Interface/Authentication Failure Message;
+        else (no)
+            : Redirect to Login/Register Page;
+            : Login/Register;
+            : Verify User Credentials;
+            : Profile Management Interface/Authentication Failure Message;
+        endif
+        stop
+    case ()
+        : Login/Register Page;
+        : Login/Register;
+        : Verify User Credentials;
+        stop
+endswitch
+
+@enduml
