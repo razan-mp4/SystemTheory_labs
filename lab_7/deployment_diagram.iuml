@@ -1,0 +1,43 @@
+@startuml
+' Define deployment styles
+skinparam componentStyle uml2
+
+' Nodes
+node "Client Device" {
+    artifact "Web Browser" as WB{
+        [GuestUser UI] #LightGreen
+        [RegisteredUser UI] #LightGreen
+    }
+}
+
+node "Web Server" {
+    [Web Application] #Yellow
+}
+
+node "Application Server" {
+    [Business Logic] #Yellow
+}
+
+database "Database Server" {
+
+        [PostgreSQL Database] as PDB #LightBlue
+
+}
+
+' Actors
+actor User
+
+' Relationships
+User <--> WB : Interacts
+
+
+[GuestUser UI] .down.> [Web Application] : <<HTTP>>
+[RegisteredUser UI] .down.> [Web Application] : <<HTTP>>
+
+
+[Web Application] .down.> [Business Logic] : <<HTTP>>
+
+[Business Logic] ..> PDB : <<JDBC>>
+
+
+@enduml
