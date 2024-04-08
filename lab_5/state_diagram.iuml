@@ -3,12 +3,12 @@
 state GuestUser {
     [*] --> Unregistered : Enter NewsSystem
 
-    state fork_state <<fork>>
-    Unregistered --> fork_state : LogIn
-    fork_state --> LoggingIn : <<if registered>>
-    fork_state --> Registration : <<if not registered>>
+    state choice_state <<choice>>
+    Unregistered --> choice_state : LogIn
+    choice_state --> LoggingIn : registered
+    choice_state --> Registration : not registered
 
-    state join_state <<join>>
+    state join_state <<choice>>
     LoggingIn --> join_state
     Registration --> join_state
     join_state --> Registered : Enter NewsSystem as RegistedUser
