@@ -20,16 +20,16 @@ switch (Guest User Request to)
     case ()
         : Manage Profile;
         if (User Registered?) then (yes)
-            : Profile Management Interface/Authentication Failure Message;
+            : Display Profile Management Interface/Authentication Failure Message;
         else (no)
             : Redirect to Login/Register Page;
             : Login/Register;
             : Verify User Credentials;
-            : Profile Management Interface/Authentication Failure Message;
+            : Display Profile Management Interface/Authentication Failure Message;
         endif
         stop
     case ()
-        : Login/Register Page;
+        : Display Login/Register Page;
         : Login/Register;
         : Verify User Credentials;
         stop
