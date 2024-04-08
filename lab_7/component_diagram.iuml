@@ -1,0 +1,53 @@
+@startuml
+' Define component styles
+skinparam component {
+    BackgroundColor White
+    BorderColor Black
+}
+
+' Client Components
+package "Client" {
+    [GuestUser UI] as GuestUI
+    [RegisteredUser UI] as RegisteredUI
+    [Web Browser] as Browser
+}
+
+' Web Server Components
+package "Web Server" {
+    [Web Application] as WebApp
+}
+
+' Application Server Components
+package "Application Server" {
+    [Business Logic] as BizLogic
+}
+
+' Database Server Components
+package "Database Server" {
+    [PostgreSQL Database] as Database
+}
+
+' Interactions
+Browser --> GuestUI : HTTP
+Browser --> RegisteredUI : HTTP
+GuestUI --> WebApp : HTTP
+RegisteredUI --> WebApp : HTTP
+WebApp --> BizLogic : HTTP
+BizLogic --> Database : JDBC
+
+' Detailed Structure of Web Server
+WebApp --> "Controllers" : Process HTTP Requests
+WebApp --> "Views" : Generate HTML Responses
+WebApp --> "Models" : Handle Data Operations
+
+' Detailed Structure of Application Server
+BizLogic --> "User Management" : Handle User Authentication and Authorization
+BizLogic --> "News Management" : Manage News Operations
+BizLogic --> "Content Management" : Manage Content Operations
+
+' Detailed Structure of Database Server
+Database --> "User Profiles" : Store User Profiles
+Database --> "News Data" : Store News Information
+Database --> "Content Data" : Store Content Information
+
+@enduml
