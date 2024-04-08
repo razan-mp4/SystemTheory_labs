@@ -1,1 +1,36 @@
-@iuml
+@startuml
+
+state GuestUser {
+    [*] --> Unregistered : Enter NewsSystem
+
+    state fork_state <<fork>>
+    Unregistered --> fork_state : LogIn / Register
+    fork_state --> LoggingIn
+    fork_state --> Registration
+
+    state join_state <<join>>
+    LoggingIn --> join_state
+    Registration --> join_state
+    join_state --> Registered : Enter NewsSystem as RegistedUser
+
+    Registered --> Unregistered: LogOut
+
+}
+
+state Unregistered  : ViewNews
+state Unregistered  : ShareNews
+state Unregistered  : SearchNews
+
+
+state Registration : ShowRegistryForm
+state Registration : AddingUserToDB
+
+state LoggingIn : ShowLogInForm
+state LoggingIn : CheckingForUserInDB
+
+state Registered : ManageProfile
+state Registered : ViewNews
+state Registered : ShareNews
+state Registered : SearchNews
+
+@enduml
