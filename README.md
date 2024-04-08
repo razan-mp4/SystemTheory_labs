@@ -5,3 +5,4 @@ lab_3: building a interaction diagram via PlantUML <br />
 lab_4: building a class diagram via PlantUML <br />
 lab_5: building a state diagram via PlantUML <br />
 lab_6: building an activity diagram via PlantUML <br />
+lab_7: building deployment and component diagrams via PlantUML <br />
